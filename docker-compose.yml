@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  videogames:
+    image: postgres:latest
+    hostname: videogames
+    restart: always
+    environment :
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=ismael
+      - POSTGRES_PASSWORD=123456
+
+    ports:
+      - "5440:5432"
+
