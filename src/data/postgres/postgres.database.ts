@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { User } from "./models/user.models";
+import { User } from "./models/user.model";
 import { Player } from "./models/player.model";
 
 
