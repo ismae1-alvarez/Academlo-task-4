@@ -1,5 +1,6 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Player } from './player.model';
+import { bcryptAdapter } from '../../../config';
 
 
 @Entity()
@@ -35,4 +36,10 @@ export class User extends BaseEntity {
   
   @UpdateDateColumn()
   updated_at: Date;
+
+  @BeforeInsert()
+  encrypterPassword(){
+    this.password = bcryptAdapter.hash(this.password);
+  }
+
 }

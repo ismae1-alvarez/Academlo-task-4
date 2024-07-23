@@ -1,7 +1,6 @@
-import { CustomError } from "../../domain";
+import { CustomError, UserCreateUserDto, UserLoginUserDto } from "../../domain";
 import { Response, Request } from "express";
 import { UserServices } from "../services/user.service";
-import { UserCreateUserDto } from "../../domain/dtos/create-player.dto";
 
 
 export class UserController {
@@ -17,34 +16,26 @@ export class UserController {
         return res.status(500).json({message: 'Something went very wrong! 🧨'});
     };
 
+
     createUser = (req:Request, res:Response)=>{
         const [error, createUserDto] = UserCreateUserDto.create(req.body);
       
         if(error) return res.status(422).json(error);
+
         this.userServices.create(createUserDto!)
+            .then(user => res.status(200).json(user))
+            .catch((error: unknown) => this.getErrorMessage(error, res));
+    };
+
+    login=(req:Request, res:Response)=>{
+        const [error, loginUserDto] = UserLoginUserDto.login(req.body);
+
+        if(error) return res.status(422).json(error);
+
+        this.userServices.loginUser(loginUserDto!)
             .then(user => res.status(200).json(user))
             .catch((error: unknown) => this.getErrorMessage(error, res));
 
     };
-
-    getAllUsers = (_:Request, res: Response)=>{
-
-    };
-
-    getUserById = (req:Request, res :Response)=>{
-      
-    };
-
-    updateUserById = (req:Request, res :Response)=>{
-        const {id} =  req.params;
-
-    };
-
-    deleteUserById=(req:Request, res:Response)=>{
-        const {id} =  req.params;
-
-       
-    };
-
 
 };

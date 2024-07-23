@@ -1,6 +1,14 @@
 import { DataSource } from "typeorm";
 import { User } from "./models/user.model";
 import { Player } from "./models/player.model";
+import { Clan } from "./models/clans.model";
+import { ClanMember } from "./models/clanMember.model";
+import { Construction } from "./models/construction.model";
+import { Inventory } from "./models/inventory.model";
+import { Item } from "./models/item.model";
+import { Quest } from "./models/quest.model";
+import { Quest_player } from "./models/questPlayer.model";
+import { Resource } from "./models/resource.model";
 
 
 interface Option {
@@ -24,10 +32,10 @@ export class PostgresDatabase {
             password :  option.password,
             database :  option.database,
 
-            entities :[User, Player],
+            entities :[User, Player, Clan, ClanMember, Construction, Inventory, Item, Quest, Quest_player, Resource],
 
             synchronize: true,
-            ssl : false
+            // ssl : false
         });
     };
 
@@ -36,7 +44,6 @@ export class PostgresDatabase {
             await this.datasource.initialize();
             console.log("connect to database")
         } catch (error) {
-            console.log("fsfds")
             console.log(error)
         }
     };

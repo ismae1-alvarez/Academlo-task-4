@@ -11,12 +11,8 @@ export class UserRotes{
         
 
 
-        router.get("/", controller.getAllUsers);
-        router.get("/:id", controller.getUserById);
-        router.post("/", controller.createUser);
-        router.patch("/:id", controller.updateUserById);
-        router.delete("/:id", controller.deleteUserById);
-
+        router.post("/register", controller.createUser);
+        router.post("/login", controller.login);
 
 
         return router;

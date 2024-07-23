@@ -1,5 +1,5 @@
 
-export class UserCreateUserDto {
+export class UserLoginUserDto {
     constructor(
         public readonly email : string,
         public readonly username : string,
@@ -8,18 +8,12 @@ export class UserCreateUserDto {
 
 
 
-    static create(object : {[key : string] : any}) : [string?, UserCreateUserDto?]{
+    static login(object : {[key : string] : any}) : [string?, UserLoginUserDto?]{
         const {username, password, email}=  object;
         
         if(!username) return ["Missing username", undefined];
         if(!password) return ["Missing password", undefined];
         if(!email) return ["Missing email", undefined];
-        
-        
-
-
-
-
-        return [undefined,new UserCreateUserDto(username, password, email)];
+        return [undefined, new UserLoginUserDto(email, username, password)];
     };
 };

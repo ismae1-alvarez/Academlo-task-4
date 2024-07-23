@@ -8,7 +8,7 @@ export class AppRoutes {
          
 
 
-        routes.use("/api/v1/players/", UserRotes.routes);
+        routes.use("/api/v1/", UserRotes.routes);
 
 
 
