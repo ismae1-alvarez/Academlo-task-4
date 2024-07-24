@@ -7,6 +7,16 @@ import { Quest_player } from './questPlayer.model';
 import { ClanMember } from './clanMember.model';
 import { Inventory } from './inventory.model';
 
+enum Status {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'
+}
+
+enum Role {
+  PLAYER = "PLAYER",
+  ADMIN  = "ADMIN"
+};
+
 @Entity()
 export class Player extends BaseEntity {
   @PrimaryGeneratedColumn()
@@ -45,6 +55,13 @@ export class Player extends BaseEntity {
     default: 100,
   })
   energy: number;
+
+  @Column({
+    type : "enum", 
+    enum : Role, 
+    default : Role.PLAYER
+  })
+  role :Role
 
   @OneToMany(() => Construction, (construction) => construction.player)
   constructions: Construction[];

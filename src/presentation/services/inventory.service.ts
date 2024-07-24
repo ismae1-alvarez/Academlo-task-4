@@ -20,7 +20,7 @@ export class InventorysSevice{
 
         await this.playersServices.findOneById(id);
         
-        const player = await this.getInventori(id);
+        const player = await this.getOrCreateInventory(id);
 
         let item = await Item.findOne({
             where: {
@@ -59,9 +59,9 @@ export class InventorysSevice{
 
     async createInventoriResource(resourceData:AddResource, id:number) {
         await this.playersServices.findOneById(id);
-        const player = await this.getInventoriResource(id);
+        const player = await this.getOrCreateInventory(id);
 
-        
+        console.log(player)
 
         let resource = await Resource.findOne({
             where: {
@@ -94,11 +94,7 @@ export class InventorysSevice{
 
         await inventoryResource.save();
 
-        return player.inventory;
-
-
-
-
+        return inventoryResource.inventory;
     };
     
     async getInventori(id:number){
@@ -135,5 +131,28 @@ export class InventorysSevice{
     
           return player;
     };
+
+
+    async getOrCreateInventory(id: number) {
+        let player = await Player.findOne({
+            where: { id },
+            relations: {
+                inventory: {
+                    inventory_resource: { resource: true },
+                    inventory_item: { item: true },
+                }
+            },
+        });
+
+        if (!player) throw CustomError.notFound("Player not found");
+
+        if (!player.inventory) {
+            player.inventory = new Inventory();
+            await player.inventory.save();
+            await player.save();
+        }
+
+        return player;
+    }
 
 };

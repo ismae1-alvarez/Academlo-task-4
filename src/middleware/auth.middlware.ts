@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { JwtAdapter } from "../config";
-import { User } from "../data";
+import { Player, User } from "../data";
 
 export class AuthMiddleware {
     static async protect(req: Request, res: Response, next: NextFunction) {
@@ -27,7 +27,28 @@ export class AuthMiddleware {
 
         req.body.userSession = user;
 
-        next();
 
-    }
+
+        const player = await Player.findOne({
+            where :{
+                id : payload.id
+            }
+        });
+
+        req.body.playerUser = player;
+    
+        next();
+    };
+
+
+    static restrictedAccess = (...roles: any) => {
+        return (req: Request, res: Response, next: NextFunction) => {
+          if (!roles.includes( req.body.playerUser.role)) {
+            return res
+              .status(403)
+              .json({ message: "You are not authorized to access this route" });
+          }
+          next();
+        };
+      };
 }
