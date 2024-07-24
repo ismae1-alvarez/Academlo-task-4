@@ -9,6 +9,8 @@ import { Item } from "./models/item.model";
 import { Quest } from "./models/quest.model";
 import { Quest_player } from "./models/questPlayer.model";
 import { Resource } from "./models/resource.model";
+import { Inventory_item } from "./models/inventoryItem.model";
+import { Inventory_resource } from "./models/inventoryResource.model";
 
 
 interface Option {
@@ -32,7 +34,8 @@ export class PostgresDatabase {
             password :  option.password,
             database :  option.database,
 
-            entities :[User, Player, Clan, ClanMember, Construction, Inventory, Item, Quest, Quest_player, Resource],
+            entities :[User, Player, Clan, ClanMember, Construction, Inventory, Item, Quest, Quest_player, Resource,Inventory_item,
+                Inventory_resource,],
 
             synchronize: true,
             // ssl : false

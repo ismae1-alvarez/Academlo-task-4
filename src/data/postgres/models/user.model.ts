@@ -38,11 +38,11 @@ export class User extends BaseEntity {
 
 
   @Column({
-    type : "enum",
-    enum  :Status,
-    default : Status.ACTIVE,
-})
-status : Status;
+      type : "enum",
+      enum  :Status,
+      default : Status.ACTIVE,
+  })
+  status : Status;
 
   @CreateDateColumn()
   created_at: Date;
