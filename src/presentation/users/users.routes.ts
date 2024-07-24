@@ -10,10 +10,12 @@ export class UserRotes{
         const controller =  new UserController(services);
         
 
-
         router.post("/register", controller.createUser);
         router.post("/login", controller.login);
-
+        
+        // Tratar de proteger esto si hay tiempo
+        router.get("/users", controller.getAllUser);
+        router.get("/users/:id", controller.getAllUseById);
 
         return router;
     };

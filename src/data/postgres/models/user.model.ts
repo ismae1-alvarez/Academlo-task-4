@@ -2,6 +2,11 @@ import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, OneToMany, 
 import { Player } from './player.model';
 import { bcryptAdapter } from '../../../config';
 
+enum Status {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'   
+};
+
 
 @Entity()
 export class User extends BaseEntity {
@@ -30,6 +35,14 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Player, (player) => player.user)
   players: Player[];
+
+
+  @Column({
+    type : "enum",
+    enum  :Status,
+    default : Status.ACTIVE,
+})
+status : Status;
 
   @CreateDateColumn()
   created_at: Date;

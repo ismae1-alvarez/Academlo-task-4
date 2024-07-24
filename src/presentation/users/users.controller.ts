@@ -35,7 +35,23 @@ export class UserController {
         this.userServices.loginUser(loginUserDto!)
             .then(user => res.status(200).json(user))
             .catch((error: unknown) => this.getErrorMessage(error, res));
+    };
 
+    getAllUser=(_:Request, res:Response)=>{
+        
+        this.userServices.getAllUser() 
+            .then(users => res.status(202).json(users))
+            .catch((error: unknown) => this.getErrorMessage(error, res));
+    };
+
+    getAllUseById=(req:Request, res:Response)=>{
+        const {id} = req.params;
+
+        if(isNaN(+id)) return res.status(400).json({message : "El is debe ser un numero"});
+
+        this.userServices.getAllUseById(+id) 
+            .then(users => res.status(202).json(users))
+            .catch((error: unknown) => this.getErrorMessage(error, res));
     };
 
 };

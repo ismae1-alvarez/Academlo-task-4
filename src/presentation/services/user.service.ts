@@ -3,6 +3,12 @@ import { User } from "../../data";
 import { CustomError, UserCreateUserDto, UserLoginUserDto} from "../../domain";
 
 
+enum Status {
+  ACTIVE = 'ACTIVE',
+  INACTIVE = 'INACTIVE'   
+};
+
+
 export class UserServices {
     constructor(){};
     
@@ -64,8 +70,32 @@ export class UserServices {
             }            
     };
 
-    
+    async getAllUser(){
 
+      const user = await User.findOne({
+        where : {
+          status :  Status.ACTIVE
+        }
+      })
+
+      if(!user)throw CustomError.unAuthorized("No Hay ningun usuario creado");
+
+      return user;
+    };
+
+    async getAllUseById(id:number){
+
+      const user = await User.findOne({
+        where : {
+          id,  
+          status :  Status.ACTIVE
+        }
+      });
+
+      if(!user)throw CustomError.unAuthorized("No existe el usuario");
+
+      return user;
+    };
 
 
 
