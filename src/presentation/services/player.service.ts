@@ -40,9 +40,25 @@ export class PlayersServices{
         if(!player) throw CustomError.notFound('Player no found');
 
         return player
-
-
     };
+
+    async findOneInventoryByPlayerId(id: number){
+
+        const player = await Player.findOne({
+          where: {
+            id
+          },
+        //   relations: ['inventory']
+        })
+    
+        if(!player) throw CustomError.notFound("Player not found")
+    
+        const inventory = player.inventory;
+    
+    
+        return inventory;
+    
+      }
     
     async findPlayerByName(name:string){
         const player =  await Player.findOne({
