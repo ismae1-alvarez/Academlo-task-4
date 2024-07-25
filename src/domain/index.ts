@@ -5,3 +5,5 @@ export * from "./dtos/player/player.create.dto";
 export * from "./dtos/constructions/constructions.create.dto";
 export * from "./dtos/clanes/clanes.memember.dto";
 export * from "./dtos/clanes/clanes.create.dto";
+export * from "./dtos/quests/quests.create.dto.";
+export * from "./dtos/quests/quests.complete.dto";

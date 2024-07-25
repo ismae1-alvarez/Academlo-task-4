@@ -12,6 +12,13 @@ export class Quest_player extends BaseEntity {
 
   @ManyToOne(() => Quest, (quest) => quest.questsPlayer)
   quest: Quest;
+
+  // @Column('varchar', {
+  //   length: 255,
+  //   nullable: false,
+  //   unique: true,
+  // })
+  // name: string;
   
   @Column('boolean', {
     nullable: false,

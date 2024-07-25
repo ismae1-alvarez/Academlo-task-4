@@ -38,4 +38,4 @@ export class Quest extends BaseEntity {
 
   @UpdateDateColumn()
   updated_at: Date;
-}
+};
