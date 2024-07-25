@@ -27,7 +27,7 @@ export class ClanMember extends BaseEntity {
     enum: ClanMemberRole,
     default: ClanMemberRole.MEMBER,
   })
-  role: ClanMemberRole;
+  role: ClanMemberRole | string;
 
   @CreateDateColumn()
   created_at: Date;
