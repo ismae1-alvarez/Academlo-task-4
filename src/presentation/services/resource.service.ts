@@ -46,13 +46,11 @@ export class ResourceService{
             relations: {
               inventory: {
                 inventory_resource: {resource : true},
-                // inventory_item : {item : true},
               }
             },
           });      
           if (!player) throw CustomError.notFound("Player not found");
     
-          console.log(player)
           return player;
     };
 

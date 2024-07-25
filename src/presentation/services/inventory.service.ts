@@ -61,7 +61,6 @@ export class InventorysSevice{
         await this.playersServices.findOneById(id);
         const player = await this.getOrCreateInventory(id);
 
-        console.log(player)
 
         let resource = await Resource.findOne({
             where: {

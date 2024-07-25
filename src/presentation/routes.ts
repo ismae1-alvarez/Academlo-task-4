@@ -4,6 +4,7 @@ import { PlayersRotes } from "./players/players.routes";
 import { AuthMiddleware } from "../middleware";
 import { InventorysRoutes } from "./inventorys/inventorys.routes";
 import { ResourcesRotes } from "./resources/resource.routes";
+import { ContructionsRoutes } from "./constructions/contructions.routes";
 
 export class AppRoutes {
     static get routes():Router{
@@ -20,6 +21,7 @@ export class AppRoutes {
         routes.use("/api/v1/", PlayersRotes.routes);
         routes.use("/api/v1/", InventorysRoutes.routes);
         routes.use("/api/v1/", ResourcesRotes.routes);
+        routes.use("/api/v1/", ContructionsRoutes.routes);
 
 
 
